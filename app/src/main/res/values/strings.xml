@@ -96,5 +96,18 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="nombre">esto es una imagen</string>
+    <string name="tvPrice">Price</string>
+    <string name="bnt_another">Try another</string>
+    <string-array name="array_categorias">
+        <item>education</item>
+        <item>recreational</item>
+        <item>social</item>
+        <item>diy</item>
+        <item>charity</item>
+        <item>cooking</item>
+        <item>relaxation</item>
+        <item>music</item>
+        <item>busywork</item>
+    </string-array>
 
 </resources>

@@ -3,4 +3,6 @@
     <string name="title">Not Bored</string>
     <string name="tv_term">Terminos y condiciones</string>
     <string name="textview">Participants</string>
+    <string name="tvPrice">Price</string>
+    <string name="bnt_another">Try another</string>
 </resources>

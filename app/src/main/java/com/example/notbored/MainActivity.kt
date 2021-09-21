@@ -10,6 +10,7 @@ import com.example.notbored.ui.main.MainFragment
 class MainActivity : AppCompatActivity() {
 private lateinit var navController:NavController
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
@@ -18,6 +19,7 @@ private lateinit var navController:NavController
         )
 
         NavigationUI.setupActionBarWithNavController(this,navController)
+
 
     }
     override fun onSupportNavigateUp(): Boolean {

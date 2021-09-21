@@ -26,5 +26,14 @@
         android:id="@+id/listOfActivities"
         android:name="com.example.notbored.ui.main.ListOfActivities"
         android:label="fragment_list_of_activities_list"
-        tools:layout="@layout/fragment_list_of_activities_list" />
+        tools:layout="@layout/fragment_list_of_activities_list" >
+        <action
+            android:id="@+id/action_listOfActivities_to_detail"
+            app:destination="@id/detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail"
+        android:name="com.example.notbored.Detail"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
 </navigation>
