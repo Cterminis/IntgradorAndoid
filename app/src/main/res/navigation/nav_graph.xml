@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.notbored.ui.main.MainFragment"
+        android:label="fragmento"
+        tools:layout="@layout/main_fragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_scrollingFragment"
+            app:destination="@id/scrollingFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_listOfActivities"
+            app:destination="@id/listOfActivities" />
+    </fragment>
+    <fragment
+        android:id="@+id/scrollingFragment"
+        android:name="com.example.notbored.ui.main.ScrollingFragment"
+        android:label="fragment_scrolling"
+        tools:layout="@layout/fragment_scrolling" />
+    <fragment
+        android:id="@+id/listOfActivities"
+        android:name="com.example.notbored.ui.main.ListOfActivities"
+        android:label="fragment_list_of_activities_list"
+        tools:layout="@layout/fragment_list_of_activities_list" />
+</navigation>
