@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notbored.R
 import com.example.notbored.adapter.MyItemRecyclerViewAdapter
-import com.example.notbored.ui.main.placeholder.PlaceholderContent
+
 
 /**
  * A fragment representing a list of Items.
@@ -47,7 +47,9 @@ class ListOfActivities : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS)
+              //  val lista= resources.getStringArray(R.array.array_categorias)
+           val lista= arrayListOf("education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork")
+                adapter = MyItemRecyclerViewAdapter( lista)
             }
         }
         return view
