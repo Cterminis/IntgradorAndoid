@@ -1,8 +1,11 @@
 package com.example.notbored.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,12 +19,15 @@ import com.example.notbored.adapter.MyItemRecyclerViewAdapter
 class ListOfActivities : Fragment() {
 
     private var columnCount = 1
-
+    var numero = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
+          //  columnCount = it.getInt(ARG_COLUMN_COUNT)
+            numero = it.getString("personas").toString()
+            Log.i("juanita2", "List:$numero ")
+            it.putString("personas", numero)
         }
     }
 
@@ -47,26 +53,25 @@ class ListOfActivities : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-              //  val lista= resources.getStringArray(R.array.array_categorias)
-           val lista= arrayListOf("education", "recreational", "social", "diy", "charity", "cooking", "relaxation", "music", "busywork")
-                adapter = MyItemRecyclerViewAdapter( lista)
+                //  val lista= resources.getStringArray(R.array.array_categorias)
+                val lista = arrayListOf("education",
+                    "recreational",
+                    "social",
+                    "diy",
+                    "charity",
+                    "cooking",
+                    "relaxation",
+                    "music",
+                    "busywork")
+                adapter = MyItemRecyclerViewAdapter(lista, View.OnClickListener {
+                    Toast.makeText(requireContext(), "$numero", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_listOfActivities_to_detail,arguments)
+                })
+
             }
         }
         return view
     }
 
-    companion object {
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
-
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            ListOfActivities().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
-    }
 }
