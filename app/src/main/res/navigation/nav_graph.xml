@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/detail"
-        android:name="com.example.notbored.Detail"
+        android:name="com.example.notbored.ui.main.Detail"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
 </navigation>

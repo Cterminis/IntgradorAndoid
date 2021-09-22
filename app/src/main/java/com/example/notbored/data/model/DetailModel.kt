@@ -5,5 +5,6 @@ data class DetailModel (
    val accessibility:String,
    val type:String,
    val participants:String,
-   val price:String
+   val price:String,
+   val key:String
         )

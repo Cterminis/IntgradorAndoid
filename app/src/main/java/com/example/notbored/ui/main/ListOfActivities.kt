@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notbored.R
+import com.example.notbored.R.id.action_listOfActivities_to_detail
 import com.example.notbored.adapter.MyItemRecyclerViewAdapter
 
 
@@ -29,15 +30,6 @@ class ListOfActivities : Fragment() {
             Log.i("juanita2", "List:$numero ")
             it.putString("personas", numero)
         }
-    }
-
-    //revisar menu inflater
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateView(
@@ -63,10 +55,10 @@ class ListOfActivities : Fragment() {
                     "relaxation",
                     "music",
                     "busywork")
-                adapter = MyItemRecyclerViewAdapter(lista, View.OnClickListener {
-                    Toast.makeText(requireContext(), "$numero", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_listOfActivities_to_detail,arguments)
-                })
+                adapter = MyItemRecyclerViewAdapter(lista) {
+                    Toast.makeText(requireContext(), numero, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(action_listOfActivities_to_detail, arguments)
+                }
 
             }
         }
