@@ -45,9 +45,6 @@ class MainViewModel : ViewModel() {
                         it.postValue(ErrorModel(detail!!.error))
                     }
 
-                } ?: errShowMessage.let {
-
-
                 }
             }
 
@@ -65,7 +62,7 @@ class MainViewModel : ViewModel() {
     }
 
 
-    fun getdetailExample() {
+    fun getDetailRandom() {
 
         val call = detailService.getActivityDetaillRandom()
 

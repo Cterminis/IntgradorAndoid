@@ -10,14 +10,16 @@ import javax.security.auth.login.LoginException
 interface DetailApi {
     //aca van loos get y request de la api
 
-    @GET("api/activity?")
+    //url print
+
+    @GET("activity?")
     fun getActivityDetaill(
-        @Query("type") type: String,
-        @Query("participants") participants: String
+        @Query("type",encoded = true) type: String,
+        @Query("participants",encoded = true) participants: String
 
     ): Call<DetailModel>
 
-    @GET("api/activity/")
+    @GET("activity/")
     fun getActivityDetaillRandom(
         )  : Call<DetailModel>
 }

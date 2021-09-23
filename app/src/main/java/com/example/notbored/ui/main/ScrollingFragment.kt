@@ -20,19 +20,14 @@ private  lateinit var binding: FragmentScrollingBinding
         savedInstanceState: Bundle?,
     ): View? {
         binding= FragmentScrollingBinding.inflate(inflater,container,false)
-
-
-        return binding.root
-
-
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
         binding.ibClose.setOnClickListener {
             findNavController().popBackStack()
         }
+        return binding.root
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
 }

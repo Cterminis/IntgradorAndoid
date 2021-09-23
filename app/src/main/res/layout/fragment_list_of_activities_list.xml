@@ -9,4 +9,5 @@
     android:padding="16dp"
     app:layoutManager="LinearLayoutManager"
     tools:context=".ui.main.ListOfActivities"
+
     tools:listitem="@layout/fragment_list_of_activities" />

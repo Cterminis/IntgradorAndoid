@@ -8,139 +8,104 @@ import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.notbored.R
 import com.example.notbored.databinding.FragmentDetailBinding
 
 
-class Detail : Fragment() {
+class Detail : Fragment(R.layout.fragment_detail) {
     // TODO: Rename and change types of parameters
     private lateinit var quantity: String
     private lateinit var category: String
 
     private lateinit var viewModel: MainViewModel
-    //private lateinit var binding: FragmentDetailBinding
+    private var _binding: FragmentDetailBinding? = null
+    private val binding get() = _binding!!
 
-    /*
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        Toast.makeText(requireContext(), "holi $param1", Toast.LENGTH_SHORT).show()
-        Log.i("Juanita", "onCreate: $param1")
-        param1?.let { viewModel.getdetail(it, "recreational") }
-        binding = FragmentDetailBinding.inflate(layoutInflater)
-        viewModel.detailActivity.observe(viewLifecycleOwner, {
-
-            binding.tvDetalleTitulo.text = it.activity
-
-
-        })
-
-    }
-*/
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-
-        val view = inflater.inflate(R.layout.fragment_detail, container, false)
-
-        return view
-
-    }
-
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         arguments?.let {
             quantity = it.getString(getString(R.string.key_value)).toString()
             category = it.getString(getString(R.string.key_value_category)).toString()
         }
 
-        val txt = view?.findViewById<TextView>(R.id.tv_detalle_titulo)
-        val txt2 = view?.findViewById<TextView>(R.id.tv_precio)
-        val txt3 = view?.findViewById<TextView>(R.id.tv_gente)
-        val txt4 = view?.findViewById<TextView>(R.id.tv_categoria)
-
-        val btn = view?.findViewById<Button>(R.id.button2)
-
-        val pb = view?.findViewById<ProgressBar>(R.id.progressBar)
-
-
-        val ly1 = view?.findViewById<LinearLayout>(R.id.linearLayout)
-        val ly2 = view?.findViewById<LinearLayout>(R.id.linearLayout2)
-
-        val txtError = view?.findViewById<TextView>(R.id.tv_error_body)
-        val txtErrorAdorno = view?.findViewById<TextView>(R.id.tv_error_face)
-
-        with(viewModel) {
-
-            // getdetailExample(param1!!)
-
-            getdetail(category, quantity)
-            isLoadingProgressBar.observe(viewLifecycleOwner){
-            pb?.isVisible=it
-                txt?.isVisible=!it
-                ly1?.isVisible=!it
-                ly2?.isVisible=!it
-
-            }
-
-
-           /*
-
-            errMessage.observe(viewLifecycleOwner){ res ->
-                txtError?.isVisible=res
-                txtErrorAdorno?.isVisible=res
-               errShowMessage.observe(viewLifecycleOwner){
-                   Toast.makeText(context, "$it.error", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            */
-
-            detailActivity.observe(viewLifecycleOwner, {
-                //validar
-                txt?.text = it.activity // titulo
-                txt2?.text = showPrice(it.price.toFloat())
-                txt3?.text = it.participants //cantidad
-                txt4?.text = category //categori
-
-            })
-        }
-
-        btn?.setOnClickListener {
-            tryAnother()
-        }
 
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        // Inflate the layout for this fragment
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        tryAnother()
+        with(binding) {
+
+            button2.setOnClickListener {
+
+                if (tvErrorBody.isVisible){
+                    findNavController().navigate(R.id.action_detail_to_mainFragment)
+                }else{
+                    tryAnother()
+
+                }
+            }
+
+        }
+
+        return binding.root
+    }
+
     fun tryAnother() {
-        val txt = view?.findViewById<TextView>(R.id.tv_detalle_titulo)
-        val txt2 = view?.findViewById<TextView>(R.id.tv_precio)
-        val txt3 = view?.findViewById<TextView>(R.id.tv_gente)
-        val txt4 = view?.findViewById<TextView>(R.id.tv_categoria)
 
+        with(binding) {
 
-        with(viewModel) {
+            with(viewModel) {
 
-            getdetailExample()
+                getdetail(category, quantity)
 
-            detailActivity.observe(viewLifecycleOwner, {
+                isLoadingProgressBar.observe(viewLifecycleOwner) {
+                    hide(it)
+                }
 
-                txt?.text = it.activity // titulo
-                txt2?.text = showPrice(it.price.toFloat())
-                txt3?.text = it.participants //cantidad
-                txt4?.text = category//categori
+                errMessage.observe(viewLifecycleOwner) { res ->
+                    tvErrorBody.isVisible = res
+                    tvErrorFace.isVisible = res
+                    tvDetalleTitulo.isVisible = !res
+                    linearLayout2.isVisible = !res
+                    errShowMessage.observe(viewLifecycleOwner) {
+                        Toast.makeText(context, "$it.error", Toast.LENGTH_SHORT).show()
+                    }
+                }
 
-            })
+                detailActivity.observe(viewLifecycleOwner) {
+                    //validar
+                    tvDetalleTitulo.text = it.activity // titulo
+                    tvPrecio.text = showPrice(it.price.toFloat())
+                    tvGente.text = it.participants //cantidad
+                    tvCategoria.text = category //categori
 
+                }
+            }
+
+        }
+    }
+
+    private fun hide(it: Boolean) {
+        with(binding){
+            linearLayout.isVisible = !it
+            linearLayout2.isVisible = !it
+            textView6.isVisible = !it
+            textView8.isVisible = !it
+            tvCategoria.isVisible=!it
+            tvPrecio.isVisible=!it
+            tvGente.isVisible=!it
+            progressBar.isVisible = it
+            tvDetalleTitulo.isVisible = !it
         }
 
     }
@@ -155,4 +120,5 @@ class Detail : Fragment() {
             else -> "HIGH"
         }
     }
+
 }

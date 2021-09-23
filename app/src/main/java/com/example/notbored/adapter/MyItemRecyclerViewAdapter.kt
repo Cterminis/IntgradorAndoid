@@ -3,12 +3,11 @@ package com.example.notbored.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notbored.R
 
 
-class MyItemRecyclerViewAdapter(val lista: ArrayList<String>, val listener: View.OnClickListener) :
+class MyItemRecyclerViewAdapter(private val lista: Array<String>, val listener: View.OnClickListener) :
     RecyclerView.Adapter<CategoryViewHolder>(), View.OnClickListener {
 
 
