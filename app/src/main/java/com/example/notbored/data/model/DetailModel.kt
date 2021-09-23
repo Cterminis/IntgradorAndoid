@@ -6,5 +6,6 @@ data class DetailModel (
    val type:String,
    val participants:String,
    val price:String,
-   val key:String
+   val key:String,
+   val error:String
         )

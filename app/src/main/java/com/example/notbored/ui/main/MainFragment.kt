@@ -31,12 +31,13 @@ class MainFragment : Fragment() {
             val bundle=Bundle()
 
             button.setOnClickListener {
-                bundle.putString("personas",editTextNumber.text.toString())
+                bundle.putString(getString(R.string.key_value),editTextNumber.text.toString())
                 findNavController().navigate(R.id.action_mainFragment_to_listOfActivities,bundle)
             }
             textView3.setOnClickListener {
                 findNavController().navigate(R.id.action_mainFragment_to_scrollingFragment)
             }
+
 
         }
     }

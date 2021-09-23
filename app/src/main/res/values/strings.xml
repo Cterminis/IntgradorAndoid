@@ -109,5 +109,9 @@
         <item>music</item>
         <item>busywork</item>
     </string-array>
+    <string name="key_value">personas</string>
+    <string name="key_value_category">category</string>
+    <string name="sad_face">:(</string>
+    <string name="pantalla_azul">PANTALLA AZUL</string>
 
 </resources>

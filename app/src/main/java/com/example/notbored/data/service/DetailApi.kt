@@ -18,6 +18,6 @@ interface DetailApi {
     ): Call<DetailModel>
 
     @GET("api/activity/")
-    fun getActivityDetaillEx(
+    fun getActivityDetaillRandom(
         )  : Call<DetailModel>
 }

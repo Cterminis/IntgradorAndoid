@@ -20,15 +20,14 @@ import com.example.notbored.adapter.MyItemRecyclerViewAdapter
 class ListOfActivities : Fragment() {
 
     private var columnCount = 1
-    var numero = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-          //  columnCount = it.getInt(ARG_COLUMN_COUNT)
-            numero = it.getString("personas").toString()
-            Log.i("juanita2", "List:$numero ")
-            it.putString("personas", numero)
+
+            it.putString(getString(R.string.key_value),
+                it.getString(getString(R.string.key_value)).toString())
         }
     }
 
@@ -55,8 +54,12 @@ class ListOfActivities : Fragment() {
                     "relaxation",
                     "music",
                     "busywork")
-                adapter = MyItemRecyclerViewAdapter(lista) {
-                    Toast.makeText(requireContext(), numero, Toast.LENGTH_SHORT).show()
+                adapter = MyItemRecyclerViewAdapter(lista) { view ->
+                    val category = lista[getChildAdapterPosition(view)]
+
+                    arguments.let {
+                        it?.putString(getString(R.string.key_value_category), category)
+                    }
                     findNavController().navigate(action_listOfActivities_to_detail, arguments)
                 }
 

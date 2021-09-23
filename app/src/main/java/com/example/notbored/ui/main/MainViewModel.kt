@@ -11,45 +11,65 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.create
+import java.io.IOError
 
 class MainViewModel : ViewModel() {
 
     val isLoadingProgressBar = MutableLiveData<Boolean>()
     val detailActivity = MutableLiveData<DetailModel>()
-    val errMessage = MutableLiveData<ErrorModel>()
+    val errMessage = MutableLiveData<Boolean>()
+    val errShowMessage = MutableLiveData<ErrorModel>()
     val detailService: DetailApi = getRetrofit().create()
 
 
     fun getdetail(type: String, quantity: String) {
+        isLoadingProgressBar.postValue(true)
+        errMessage.postValue(false)
+        val call = detailService.getActivityDetaill(type, quantity)
 
-        val call = detailService.getActivityDetaill(type,quantity)
-
-        call.enqueue(object : Callback<DetailModel>{
+        call.enqueue(object : Callback<DetailModel> {
 
             override fun onResponse(call: Call<DetailModel>, response: Response<DetailModel>) {
                 Log.i("Conection", "onResponse: ${response.body()} ")
-                response.body().let {
-                    detailActivity.postValue(it)
-                }
 
+                response.body().let { detail ->
+
+                    detail?.price?.let {
+                        isLoadingProgressBar.postValue(false)
+                        detailActivity.postValue(detail)
+
+                    } ?: errShowMessage.let {
+
+                        isLoadingProgressBar.postValue(false)
+                        errMessage.postValue(true)
+                        it.postValue(ErrorModel(detail!!.error))
+                    }
+
+                } ?: errShowMessage.let {
+
+
+                }
             }
+
 
             override fun onFailure(call: Call<DetailModel>, t: Throwable) {
                 Log.i("Conection", "onFailure: ${t.message}")
-
                 Log.i("Conection", "onFailure: ${call.request().url()}")
                 Log.i("Conection", "onFailure: ${call.request().body()}")
-              //fallas del servidor
-               call.cancel()
+                isLoadingProgressBar.postValue(false)
+                errMessage.postValue(true)
+                //fallas del servidor
+                call.cancel()
             }
         })
-
     }
-    fun getdetailExample(quantity: String) {
 
-        val call = detailService.getActivityDetaillEx()
 
-        call.enqueue(object : Callback<DetailModel>{
+    fun getdetailExample() {
+
+        val call = detailService.getActivityDetaillRandom()
+
+        call.enqueue(object : Callback<DetailModel> {
 
             override fun onResponse(call: Call<DetailModel>, response: Response<DetailModel>) {
                 Log.i("Conection", "onResponse: ${response.body()} ")
@@ -63,8 +83,8 @@ class MainViewModel : ViewModel() {
                 Log.i("Conection", "onFailure: ${t.message}")
                 Log.i("Conection", "onFailure: ${call.request().url()}")
 
-              //fallas del servidor
-               call.cancel()
+
+                call.cancel()
             }
         })
 
