@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.notbored.ui.main.MainFragment"
+        android:name="com.example.notbored.ui.main.fragments.MainFragment"
         android:label=" "
         tools:layout="@layout/main_fragment">
         <action
@@ -16,15 +16,17 @@
         <action
             android:id="@+id/action_mainFragment_to_listOfActivities"
             app:destination="@id/listOfActivities" />
+        <action
+            android:id="@+id/action_mainFragment_to_detail"
+            app:destination="@id/detail" />
     </fragment>
     <fragment
         android:id="@+id/scrollingFragment"
-        android:name="com.example.notbored.ui.main.ScrollingFragment"
-        android:label="fragment_scrolling"
+        android:name="com.example.notbored.ui.main.fragments.ScrollingFragment"
         tools:layout="@layout/fragment_scrolling" />
     <fragment
         android:id="@+id/listOfActivities"
-        android:name="com.example.notbored.ui.main.ListOfActivities"
+        android:name="com.example.notbored.ui.main.fragments.ListOfActivities"
         android:label="Category"
         tools:layout="@layout/fragment_list_of_activities_list">
         <action
@@ -33,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/detail"
-        android:name="com.example.notbored.ui.main.Detail"
+        android:name="com.example.notbored.ui.main.fragments.Detail"
         android:label="Detail"
         tools:layout="@layout/fragment_detail">
         <action

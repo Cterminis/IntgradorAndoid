@@ -1,4 +1,4 @@
-package com.example.notbored.ui.main
+package com.example.notbored.ui.main.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle

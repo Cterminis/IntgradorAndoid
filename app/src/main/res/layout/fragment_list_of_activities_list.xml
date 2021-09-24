@@ -8,6 +8,6 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.main.ListOfActivities"
+    tools:context=".ui.main.fragments.ListOfActivities"
 
     tools:listitem="@layout/fragment_list_of_activities" />

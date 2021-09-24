@@ -6,12 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.example.notbored.core.RetrofitHelper.getRetrofit
 import com.example.notbored.data.model.DetailModel
 import com.example.notbored.data.model.ErrorModel
-import com.example.notbored.data.service.DetailApi
+import com.example.notbored.data.network.service.DetailApi
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.create
-import java.io.IOError
 
 class MainViewModel : ViewModel() {
 
@@ -50,9 +49,7 @@ class MainViewModel : ViewModel() {
 
 
             override fun onFailure(call: Call<DetailModel>, t: Throwable) {
-                Log.i("Conection", "onFailure: ${t.message}")
-                Log.i("Conection", "onFailure: ${call.request().url()}")
-                Log.i("Conection", "onFailure: ${call.request().body()}")
+                Log.i("Conection", "onFailure: ${t.message}, URL:  ${call.request().url()}" )
                 isLoadingProgressBar.postValue(false)
                 errMessage.postValue(true)
                 //fallas del servidor
@@ -69,6 +66,7 @@ class MainViewModel : ViewModel() {
         call.enqueue(object : Callback<DetailModel> {
 
             override fun onResponse(call: Call<DetailModel>, response: Response<DetailModel>) {
+
                 Log.i("Conection", "onResponse: ${response.body()} ")
                 response.body().let {
                     detailActivity.postValue(it)
@@ -77,9 +75,7 @@ class MainViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<DetailModel>, t: Throwable) {
-                Log.i("Conection", "onFailure: ${t.message}")
-                Log.i("Conection", "onFailure: ${call.request().url()}")
-
+                Log.i("Conection", "onFailure: ${t.message}, URl:${call.request().url()}")
 
                 call.cancel()
             }

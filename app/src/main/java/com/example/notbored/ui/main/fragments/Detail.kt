@@ -1,4 +1,4 @@
-package com.example.notbored.ui.main
+package com.example.notbored.ui.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.notbored.R
 import com.example.notbored.databinding.FragmentDetailBinding
+import com.example.notbored.ui.main.MainViewModel
+import kotlin.random.Random
 
 
 class Detail : Fragment(R.layout.fragment_detail) {
@@ -29,6 +31,10 @@ class Detail : Fragment(R.layout.fragment_detail) {
         arguments?.let {
             quantity = it.getString(getString(R.string.key_value)).toString()
             category = it.getString(getString(R.string.key_value_category)).toString()
+        }?: arguments.run {
+            //getRandom
+            category= resources.getStringArray(R.array.array_categorias).random()
+            quantity="1"
         }
 
 

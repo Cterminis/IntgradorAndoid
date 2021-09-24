@@ -113,5 +113,7 @@
     <string name="key_value_category">category</string>
     <string name="sad_face">:(</string>
     <string name="pantalla_azul">PANTALLA AZUL</string>
+    <string name="random">Random</string>
+    <string name="home">Home</string>
 
 </resources>

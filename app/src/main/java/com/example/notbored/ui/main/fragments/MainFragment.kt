@@ -1,4 +1,4 @@
-package com.example.notbored.ui.main
+package com.example.notbored.ui.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.notbored.R
 import com.example.notbored.databinding.MainFragmentBinding
+import com.example.notbored.ui.main.MainViewModel
 
 class MainFragment : Fragment(R.layout.main_fragment) {
 
@@ -17,29 +18,25 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: MainFragmentBinding
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = MainFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         with(binding) {
-            val bundle=Bundle()
+            val bundle = Bundle()
 
-            button.isEnabled= false
+            button.isEnabled = false
             editTextNumber.doAfterTextChanged {
                 button.isEnabled =
-                    editTextNumber.text.isNotEmpty() &&  editTextNumber.text.toString().toInt()>=1
+                    editTextNumber.text.isNotEmpty() && editTextNumber.text.toString().toInt() >= 1
             }
 
             button.setOnClickListener {
-                bundle.putString(getString(R.string.key_value),editTextNumber.text.toString())
-                findNavController().navigate(R.id.action_mainFragment_to_listOfActivities,bundle)
+                bundle.putString(getString(R.string.key_value), editTextNumber.text.toString())
+                findNavController().navigate(R.id.action_mainFragment_to_listOfActivities, bundle)
             }
             textView3.setOnClickListener {
                 findNavController().navigate(R.id.action_mainFragment_to_scrollingFragment)
@@ -47,6 +44,12 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
 
         }
+
+        return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
 }
